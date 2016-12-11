@@ -171,10 +171,11 @@ public partial class Dairy : System.Web.UI.Page
     {
         int id = Convert.ToInt32((sender as LinkButton).CommandArgument);
         string sql1 = "delete from inf where id='" + id + "'";
-      
+        string sql2= "delete from inf where id1='" + id + "'";
+
         int result = Class.Put(sql1);
-       
-        if (result == 1)
+        int result1 = Class.Put(sql2);
+        if (result == 1&&result1 ==1)
                 Response.Write("<script>alert('删除成功！');location='Dairy.aspx'</script>");
             else
                 Response.Write("<script>alert('删除失败！');location='Dairy.aspx'</script>");
@@ -207,6 +208,43 @@ public partial class Dairy : System.Web.UI.Page
             //数据绑定
             rept.DataSource = Class.Table(select);
             rept.DataBind();
+        }
+    }
+
+    protected void repeaterdiary_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName == "yes")
+        {
+            int id = Convert.ToInt32(e.CommandArgument.ToString());
+            string ID = Session["ID1"].ToString();
+            string sql = "select*from inf where id='" + id + "'";
+
+            DataTable dt = new DataTable();
+
+            dt = Class.Table(sql);
+            string zan = dt.Rows[0][17].ToString();
+            string sql2 = "select*from inf where good1 like'%" + ID + "%' and id='" + id + "'";
+            int result3 = Class.exist(sql2);
+
+            if (result3 > 0)
+                Response.Write("<script>alert('一个用户只能赞一次！'),location='Dairy.aspx'</script>");
+            else
+            {
+                string zan1 = zan + ID + ' ';
+                string result2 = Class.Search8(sql);
+                int good = Convert.ToInt32(result2) + 1;
+                string sql1 = "update inf set good='" + good + "' where id='" + id + "'";
+                string sql3 = "update inf set good1='" + zan1 + "' where id='" + id + "'";
+
+                int result = Class.Put(sql1);
+                int result1 = Class.Put(sql3);
+                if (result > 0 && result1 > 0)
+                    Response.Write("<script>alert('赞成功！'),location='Dairy.aspx'</script>");
+                else
+                    Response.Write("<script>alert('赞失败！'),location='Dairy.aspx'</script>");
+
+            }
+
         }
     }
 }

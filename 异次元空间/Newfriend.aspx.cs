@@ -40,8 +40,8 @@ public partial class Newfriend : System.Web.UI.Page
                 {
                     using (SqlCommand Cmd = Conn.CreateCommand())
                     {
-                        Cmd.CommandText = "select * from tabUsers where ID!='"+ID+"'";
-                        
+                        Cmd.CommandText = "select * from tabUsers where ID!='" + ID + "'";
+
                         int count = Convert.ToInt32(Cmd.ExecuteScalar());
                         int currentPage = 1;
                         DataTable dt = new DataTable();
@@ -166,13 +166,13 @@ public partial class Newfriend : System.Web.UI.Page
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
-                                friend1.Visible = false ;
+                                friend1.Visible = false;
                                 page1.Visible = false;
                                 return;
                             }
                         }
-                    
-                        
+
+
                     }
                     catch (Exception ex)
                     {
@@ -182,29 +182,29 @@ public partial class Newfriend : System.Web.UI.Page
                 }
 
             }
-            
-                
-            }
-                if (dropProv.SelectedValue == "昵称")
-                {
-                    string str1 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                    using (SqlConnection Conn = new SqlConnection(str1))
-                    {
-                        Conn.Open(); //打开数据库 
+
+
+        }
+        if (dropProv.SelectedValue == "昵称")
+        {
+            string str1 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
+            using (SqlConnection Conn = new SqlConnection(str1))
+            {
+                Conn.Open(); //打开数据库 
                 try
                 {
                     using (SqlCommand Cmd = Conn.CreateCommand())
                     {
                         //string massage2 = "%" + massage + "%";
                         Cmd.CommandText = "select*from tabUsers where name like @name ";
-                        Cmd.Parameters.Add(new SqlParameter("@name","%"+massage +"%" ));
+                        Cmd.Parameters.Add(new SqlParameter("@name", "%" + massage + "%"));
                         int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
                         int currentPage = 1;
                         if (count2 != 0)
                         {
                             DataTable dt = new DataTable();
 
-                            dt = Class.Table("select*from tabUsers where name like '%" + massage + "%' and ID!='"+ID+"'");
+                            dt = Class.Table("select*from tabUsers where name like '%" + massage + "%' and ID!='" + ID + "'");
 
                             PagedDataSource pds = new PagedDataSource();
 
@@ -261,21 +261,21 @@ public partial class Newfriend : System.Web.UI.Page
                 {
                     Console.WriteLine(ex.Message);
                 }
-                    }
-               
-                }
-            if (dropProv.SelectedValue == "出生日期")
+            }
+
+        }
+        if (dropProv.SelectedValue == "出生日期")
+        {
+            string str2 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
+            using (SqlConnection Conn = new SqlConnection(str2))
             {
-                string str2 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                using (SqlConnection Conn = new SqlConnection(str2))
+                Conn.Open(); //打开数据库 
+                try
                 {
-                    Conn.Open(); //打开数据库 
-                    try
+                    using (SqlCommand Cmd = Conn.CreateCommand())
                     {
-                        using (SqlCommand Cmd = Conn.CreateCommand())
-                        {
-                            Cmd.CommandText = "select * from tabUsers where year like @year ";
-                            Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
+                        Cmd.CommandText = "select * from tabUsers where year like @year ";
+                        Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                         int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
                         int currentPage = 1;
                         if (count2 != 0)
@@ -335,31 +335,31 @@ public partial class Newfriend : System.Web.UI.Page
                         }
                     }
                 }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
-              if (dropProv.SelectedValue == "性别")
+        }
+        if (dropProv.SelectedValue == "性别")
+        {
+            string str3 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
+            using (SqlConnection Conn = new SqlConnection(str3))
+            {
+                Conn.Open(); //打开数据库 
+                try
+                {
+                    using (SqlCommand Cmd = Conn.CreateCommand())
+                    {
+                        Cmd.CommandText = "select * from tabUsers where sex=@sex ";
+                        Cmd.Parameters.Add(new SqlParameter("@sex", massage));
+                        int count = Convert.ToInt32(Cmd.ExecuteScalar());
+                        if (count > 0)
                         {
-                            string str3 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                            using (SqlConnection Conn = new SqlConnection(str3))
-                            {
-                                Conn.Open(); //打开数据库 
-                                try
-                                {
-                                    using (SqlCommand Cmd = Conn.CreateCommand())
-                                    {
-                                        Cmd.CommandText = "select * from tabUsers where sex=@sex ";
-                                        Cmd.Parameters.Add(new SqlParameter("@sex", massage));
-                            int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                        if (count>0)
-                        { 
                             int currentPage = 1;
                             DataTable dt = new DataTable();
 
-                            dt = Class.Table("select * from tabUsers where sex='"+massage+"' and ID!='"+ID+"'");
+                            dt = Class.Table("select * from tabUsers where sex='" + massage + "' and ID!='" + ID + "'");
 
                             PagedDataSource pds = new PagedDataSource();
 
@@ -411,33 +411,33 @@ public partial class Newfriend : System.Web.UI.Page
                         }
                     }
                 }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
-                    
-                }
-            
-        
-    
-                        
-                    
+        }
+
+    }
+
+
+
+
+
     protected void rptinsert_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "insert")
         {
             int id = Convert.ToInt32(e.CommandArgument.ToString());
-            string sql1= "select *from tabUsers where id='" + id + "'";
+            string sql1 = "select *from tabUsers where id='" + id + "'";
             string name = Class.Search(sql1);
-            int ID =Convert .ToInt32( Session["ID1"].ToString());
-            if(id==ID)
+            int ID = Convert.ToInt32(Session["ID1"].ToString());
+            if (id == ID)
             {
                 Response.Write("<script>alert('好友不能是自己！');</script>");
                 return;
             }
-            string sql = "insert into Friend (ID,friendID,friendname) values('" + ID + "','" + id + "','"+name+"')";
+            string sql = "insert into Friend (ID,friendID,friendname) values('" + ID + "','" + id + "','" + name + "')";
 
             int result = Class.Put(sql);
             if (result == 1)
@@ -447,7 +447,7 @@ public partial class Newfriend : System.Web.UI.Page
 
         }
     }
-   
+
     protected void btnBefore_Click(object sender, EventArgs e)//上一页
     {
         string ID = Session["ID1"].ToString();
@@ -464,10 +464,10 @@ public partial class Newfriend : System.Web.UI.Page
                     using (SqlCommand Cmd = Conn.CreateCommand())
                     {
                         Cmd.CommandText = "select * from tabUsers where ID!='" + ID + "'";
-                       
+
                         int count = Convert.ToInt32(Cmd.ExecuteScalar());
                         lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
-                        int currentPage = (Convert.ToInt32(lblCurrentPage.Text) );
+                        int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
                         DataTable dt = new DataTable();
 
                         dt = Class.Table(Cmd.CommandText);
@@ -506,7 +506,7 @@ public partial class Newfriend : System.Web.UI.Page
                         lblCurrentPage.Text = currentPage.ToString();
                         labPage.Text = Count.ToString();
                         pds.CurrentPageIndex = currentPage - 1;
-                       
+
                         rptinsert.DataSource = pds;
 
                         rptinsert.DataBind();
@@ -538,54 +538,54 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.Parameters.Add(new SqlParameter("@ID", massage));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
                             if (count2 > 0)
-                            {       
-                            lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
-                            int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
-                            DataTable dt = new DataTable();
-
-                            dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
-
-                            PagedDataSource pds = new PagedDataSource();
-
-                            pds.AllowPaging = true;
-
-                            pds.PageSize = 5;
-
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
                             {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
+                                int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
+                                DataTable dt = new DataTable();
+
+                                dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
+
+                                PagedDataSource pds = new PagedDataSource();
+
+                                pds.AllowPaging = true;
+
+                                pds.PageSize = 5;
+
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -684,9 +684,9 @@ public partial class Newfriend : System.Web.UI.Page
                 }
             }
 
-            }
-            if (dropProv.SelectedValue == "出生日期")
-            {
+        }
+        if (dropProv.SelectedValue == "出生日期")
+        {
             string str2 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
             using (SqlConnection Conn = new SqlConnection(str2))
             {
@@ -698,8 +698,9 @@ public partial class Newfriend : System.Web.UI.Page
                         Cmd.CommandText = "select * from tabUsers where year like @year ";
                         Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                         int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                        if (count2 > 0) { 
-                        lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
+                        if (count2 > 0)
+                        {
+                            lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
                             int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
                             DataTable dt = new DataTable();
 
@@ -755,29 +756,30 @@ public partial class Newfriend : System.Web.UI.Page
                         }
                     }
                 }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-
-                    }
-                }
-
-            }
-            if (dropProv.SelectedValue == "性别")
-            {
-                string str3 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                using (SqlConnection Conn = new SqlConnection(str3))
+                catch (Exception ex)
                 {
-                    Conn.Open(); //打开数据库 
-                    try
+                    Console.WriteLine(ex.Message);
+
+                }
+            }
+
+        }
+        if (dropProv.SelectedValue == "性别")
+        {
+            string str3 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
+            using (SqlConnection Conn = new SqlConnection(str3))
+            {
+                Conn.Open(); //打开数据库 
+                try
+                {
+                    using (SqlCommand Cmd = Conn.CreateCommand())
                     {
-                        using (SqlCommand Cmd = Conn.CreateCommand())
+                        Cmd.CommandText = "select * from tabUsers where sex=@sex ";
+                        Cmd.Parameters.Add(new SqlParameter("@sex", massage));
+                        int count = Convert.ToInt32(Cmd.ExecuteScalar());
+                        if (count > 0)
                         {
-                            Cmd.CommandText = "select * from tabUsers where sex=@sex ";
-                            Cmd.Parameters.Add(new SqlParameter("@sex", massage));
-                            int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count > 0) { 
-                                lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
+                            lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) - 1);
                             int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
                             DataTable dt = new DataTable();
 
@@ -823,25 +825,25 @@ public partial class Newfriend : System.Web.UI.Page
 
                             Conn.Close(); //关闭数据库
                         }
-                            else
-                            {
-                                Response.Write("<script>alert('没有相关信息！');</script>");
-                                friend1.Visible = false;
-                                page1.Visible = false;
-                                return;
-                            }
+                        else
+                        {
+                            Response.Write("<script>alert('没有相关信息！');</script>");
+                            friend1.Visible = false;
+                            page1.Visible = false;
+                            return;
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
                 }
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
         }
-    
+
+    }
+
     protected void btnNext_Click(object sender, EventArgs e)//下一页
     {
         string ID = Session["ID1"].ToString();
@@ -858,10 +860,10 @@ public partial class Newfriend : System.Web.UI.Page
                     using (SqlCommand Cmd = Conn.CreateCommand())
                     {
                         Cmd.CommandText = "select * from tabUsers where ID!='" + ID + "'";
-                        
+
                         int count = Convert.ToInt32(Cmd.ExecuteScalar());
                         lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) + 1);
-                        int currentPage =(Convert.ToInt32(lblCurrentPage.Text));
+                        int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
 
                         DataTable dt = new DataTable();
 
@@ -901,7 +903,7 @@ public partial class Newfriend : System.Web.UI.Page
                         lblCurrentPage.Text = currentPage.ToString();
                         labPage.Text = Count.ToString();
                         pds.CurrentPageIndex = currentPage - 1;
-                       
+
                         rptinsert.DataSource = pds;
 
                         rptinsert.DataBind();
@@ -916,7 +918,7 @@ public partial class Newfriend : System.Web.UI.Page
                 }
 
             }
-           
+
 
         }
         else
@@ -934,55 +936,56 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where ID='+@ID+ '";
                             Cmd.Parameters.Add(new SqlParameter("@ID", massage));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count2 > 0) { 
+                            if (count2 > 0)
+                            {
                                 lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) + 1);
-                            int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
+                                int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
 
-                            DataTable dt = new DataTable();
+                                DataTable dt = new DataTable();
 
-                            dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
+                                dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
 
-                            PagedDataSource pds = new PagedDataSource();
+                                PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1012,7 +1015,7 @@ public partial class Newfriend : System.Web.UI.Page
                     {
                         using (SqlCommand Cmd = Conn.CreateCommand())
                         {
-                          
+
                             Cmd.CommandText = "select*from tabUsers where name like @name ";
                             Cmd.Parameters.Add(new SqlParameter("@name", "%" + massage + "%"));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
@@ -1094,55 +1097,56 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where year like @year ";
                             Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count2 > 0) { 
-                            lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) + 1);
-                            int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
-                            DataTable dt = new DataTable();
+                            if (count2 > 0)
+                            {
+                                lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) + 1);
+                                int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select*from tabUsers where year like '%" + massage + "%' and ID!='" + ID + "'");
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1174,55 +1178,56 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where sex=@sex ";
                             Cmd.Parameters.Add(new SqlParameter("@sex", massage));
                             int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count > 0) { 
+                            if (count > 0)
+                            {
                                 lblCurrentPage.Text = Convert.ToString(Convert.ToInt32(lblCurrentPage.Text) + 1);
-                            int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
+                                int currentPage = (Convert.ToInt32(lblCurrentPage.Text));
 
-                            DataTable dt = new DataTable();
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select * from tabUsers where sex='" + massage + "' and ID!='" + ID + "'");
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1259,94 +1264,14 @@ public partial class Newfriend : System.Web.UI.Page
                         Cmd.CommandText = "select * from tabUsers where ID!='" + ID + "'";
 
                         int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                        if (count2 > 0) { 
-                            lblCurrentPage.Text = "+1+";
-                        int currentPage = 1;
-
-                        DataTable dt = new DataTable();
-
-                        dt = Class.Table(Cmd.CommandText);
-
-                        PagedDataSource pds = new PagedDataSource();
-
-                        pds.AllowPaging = true;
-
-                        pds.PageSize = 5;
-
-                        pds.DataSource = dt.DefaultView;
-                        int Count = pds.PageCount;
-                        if (Count == 1)
+                        if (count2 > 0)
                         {
-                            currentPage = 1;
-                            btnBefore.Enabled = false;
-                            btnNext.Enabled = false;
-                        }
-                        else if (currentPage == Count)
-                        {
-                            btnBefore.Enabled = true;
-                            btnNext.Enabled = false;
-
-                        }
-                        else if (currentPage == 1)
-                        {
-                            btnBefore.Enabled = false;
-                            btnNext.Enabled = true;
-
-                        }
-                        else
-                        {
-                            btnBefore.Enabled = true;
-                            btnNext.Enabled = true;
-                        }
-                        lblCurrentPage.Text = currentPage.ToString();
-                        labPage.Text = Count.ToString();
-                        pds.CurrentPageIndex = currentPage - 1;
-
-                        rptinsert.DataSource = pds;
-
-                        rptinsert.DataBind();
-
-                        Conn.Close(); //关闭数据库
-                    }
-                        else
-                        {
-                            Response.Write("<script>alert('没有相关信息！');</script>");
-                            friend1.Visible = false;
-                            page1.Visible = false;
-                            return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-
-                }
-
-            }
-        }
-        else
-        {
-            if (dropProv.SelectedValue == "账号")
-            {
-                string str = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                using (SqlConnection Conn = new SqlConnection(str))
-                {
-                    Conn.Open(); //打开数据库 
-                    try
-                    {
-                        using (SqlCommand Cmd = Conn.CreateCommand())
-                        {
-                            Cmd.CommandText = "select * from tabUsers where ID='+@ID+ '";
-                            Cmd.Parameters.Add(new SqlParameter("@ID", massage));
-                            int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count > 0) { 
                             lblCurrentPage.Text = "+1+";
                             int currentPage = 1;
 
                             DataTable dt = new DataTable();
 
-                            dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
+                            dt = Class.Table(Cmd.CommandText);
 
                             PagedDataSource pds = new PagedDataSource();
 
@@ -1390,13 +1315,95 @@ public partial class Newfriend : System.Web.UI.Page
                             Conn.Close(); //关闭数据库
                         }
                         else
-                            {
+                        {
                             Response.Write("<script>alert('没有相关信息！');</script>");
                             friend1.Visible = false;
                             page1.Visible = false;
                             return;
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+
+                }
+
+            }
+        }
+        else
+        {
+            if (dropProv.SelectedValue == "账号")
+            {
+                string str = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
+                using (SqlConnection Conn = new SqlConnection(str))
+                {
+                    Conn.Open(); //打开数据库 
+                    try
+                    {
+                        using (SqlCommand Cmd = Conn.CreateCommand())
+                        {
+                            Cmd.CommandText = "select * from tabUsers where ID='+@ID+ '";
+                            Cmd.Parameters.Add(new SqlParameter("@ID", massage));
+                            int count = Convert.ToInt32(Cmd.ExecuteScalar());
+                            if (count > 0)
+                            {
+                                lblCurrentPage.Text = "+1+";
+                                int currentPage = 1;
+
+                                DataTable dt = new DataTable();
+
+                                dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
+
+                                PagedDataSource pds = new PagedDataSource();
+
+                                pds.AllowPaging = true;
+
+                                pds.PageSize = 5;
+
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('没有相关信息！');</script>");
+                                friend1.Visible = false;
+                                page1.Visible = false;
+                                return;
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1411,79 +1418,79 @@ public partial class Newfriend : System.Web.UI.Page
             if (dropProv.SelectedValue == "昵称")
             {
                 string str1 = @"server=LAPTOP-CM9CUARS;Integrated Security=SSPI;database=Space;";
-                    using (SqlConnection Conn = new SqlConnection(str1))
-                    {
-                        Conn.Open(); //打开数据库 
-                try
+                using (SqlConnection Conn = new SqlConnection(str1))
                 {
-                    using (SqlCommand Cmd = Conn.CreateCommand())
+                    Conn.Open(); //打开数据库 
+                    try
                     {
-                        //string massage2 = "%" + massage + "%";
-                        Cmd.CommandText = "select*from tabUsers where name like @name ";
-                        Cmd.Parameters.Add(new SqlParameter("@name","%"+massage +"%" ));
-                        int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                        int currentPage = 1;
-                        if (count2 != 0)
+                        using (SqlCommand Cmd = Conn.CreateCommand())
                         {
-                            DataTable dt = new DataTable();
+                            //string massage2 = "%" + massage + "%";
+                            Cmd.CommandText = "select*from tabUsers where name like @name ";
+                            Cmd.Parameters.Add(new SqlParameter("@name", "%" + massage + "%"));
+                            int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
+                            int currentPage = 1;
+                            if (count2 != 0)
+                            {
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select*from tabUsers where name like '%" + massage + "%' and ID!='" + ID + "'");
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
-                            }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
 
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
 
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+
+                                Conn.Close(); //关闭数据库
                             }
                             else
                             {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
+                                Response.Write("<script>alert('没有相关信息！');</script>");
+                                friend1.Visible = false;
+                                page1.Visible = false;
+                                return;
                             }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-
-                            Conn.Close(); //关闭数据库
-                        }
-                        else
-                        {
-                            Response.Write("<script>alert('没有相关信息！');</script>");
-                            friend1.Visible = false;
-                            page1.Visible = false;
-                            return;
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
+                }
 
             }
             if (dropProv.SelectedValue == "出生日期")
@@ -1499,54 +1506,55 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where year like @year ";
                             Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count2 > 0) { 
-                            lblCurrentPage.Text = "+1+";
-                            int currentPage = 1;
-                            DataTable dt = new DataTable();
+                            if (count2 > 0)
+                            {
+                                lblCurrentPage.Text = "+1+";
+                                int currentPage = 1;
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select*from tabUsers where year like '%" + massage + "%' and ID!='" + ID + "'");
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1576,54 +1584,55 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where sex=@sex ";
                             Cmd.Parameters.Add(new SqlParameter("@sex", massage));
                             int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count > 0) { 
+                            if (count > 0)
+                            {
                                 lblCurrentPage.Text = "+1+";
-                            int currentPage = 1;
-                            DataTable dt = new DataTable();
+                                int currentPage = 1;
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select * from tabUsers where sex='" + massage + "' and ID!='" + ID + "'");
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            if (Count == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                if (Count == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1745,68 +1754,69 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where ID='+@ID+ '";
                             Cmd.Parameters.Add(new SqlParameter("@ID", massage));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count2 > 0) { 
+                            if (count2 > 0)
+                            {
 
                                 DataTable dt = new DataTable();
 
-                            dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
+                                dt = Class.Table("select * from tabUsers where ID='" + massage + "'");
 
-                            PagedDataSource pds = new PagedDataSource();
+                                PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            labPage.Text = Count.ToString();
-                            lblCurrentPage.Text = Count.ToString();
-                            int currentPage = Count;
-                            DataTable dt1 = new DataTable();
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                labPage.Text = Count.ToString();
+                                lblCurrentPage.Text = Count.ToString();
+                                int currentPage = Count;
+                                DataTable dt1 = new DataTable();
 
-                            dt1 = Class.Table(Cmd.CommandText);
+                                dt1 = Class.Table(Cmd.CommandText);
 
-                            PagedDataSource pds1 = new PagedDataSource();
+                                PagedDataSource pds1 = new PagedDataSource();
 
-                            pds1.AllowPaging = true;
+                                pds1.AllowPaging = true;
 
-                            pds1.PageSize = 5;
+                                pds1.PageSize = 5;
 
-                            pds1.DataSource = dt.DefaultView;
-                            int Count1 = pds1.PageCount;
-                            if (Count1 == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds1.DataSource = dt.DefaultView;
+                                int Count1 = pds1.PageCount;
+                                if (Count1 == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -1926,67 +1936,68 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where year like @year ";
                             Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                             int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count2 > 0) { 
+                            if (count2 > 0)
+                            {
 
-                            DataTable dt = new DataTable();
+                                DataTable dt = new DataTable();
 
                                 dt = Class.Table("select*from tabUsers where year like '%" + massage + "%' and ID!='" + ID + "'");
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            labPage.Text = Count.ToString();
-                            lblCurrentPage.Text = Count.ToString();
-                            int currentPage = Count;
-                            DataTable dt1 = new DataTable();
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                labPage.Text = Count.ToString();
+                                lblCurrentPage.Text = Count.ToString();
+                                int currentPage = Count;
+                                DataTable dt1 = new DataTable();
 
-                            dt1 = Class.Table(Cmd.CommandText);
+                                dt1 = Class.Table(Cmd.CommandText);
 
-                            PagedDataSource pds1 = new PagedDataSource();
+                                PagedDataSource pds1 = new PagedDataSource();
 
-                            pds1.AllowPaging = true;
+                                pds1.AllowPaging = true;
 
-                            pds1.PageSize = 5;
+                                pds1.PageSize = 5;
 
-                            pds1.DataSource = dt.DefaultView;
-                            int Count1 = pds1.PageCount;
-                            if (Count1 == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds1.DataSource = dt.DefaultView;
+                                int Count1 = pds1.PageCount;
+                                if (Count1 == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -2016,7 +2027,8 @@ public partial class Newfriend : System.Web.UI.Page
                             Cmd.CommandText = "select * from tabUsers where sex=@sex ";
                             Cmd.Parameters.Add(new SqlParameter("@sex", massage));
                             int count = Convert.ToInt32(Cmd.ExecuteScalar());
-                            if (count > 0) { 
+                            if (count > 0)
+                            {
 
                                 DataTable dt = new DataTable();
 
@@ -2024,59 +2036,59 @@ public partial class Newfriend : System.Web.UI.Page
 
                                 PagedDataSource pds = new PagedDataSource();
 
-                            pds.AllowPaging = true;
+                                pds.AllowPaging = true;
 
-                            pds.PageSize = 5;
+                                pds.PageSize = 5;
 
-                            pds.DataSource = dt.DefaultView;
-                            int Count = pds.PageCount;
-                            labPage.Text = Count.ToString();
-                            lblCurrentPage.Text = Count.ToString();
-                            int currentPage = Count;
-                            DataTable dt1 = new DataTable();
+                                pds.DataSource = dt.DefaultView;
+                                int Count = pds.PageCount;
+                                labPage.Text = Count.ToString();
+                                lblCurrentPage.Text = Count.ToString();
+                                int currentPage = Count;
+                                DataTable dt1 = new DataTable();
 
-                            dt1 = Class.Table(Cmd.CommandText);
+                                dt1 = Class.Table(Cmd.CommandText);
 
-                            PagedDataSource pds1 = new PagedDataSource();
+                                PagedDataSource pds1 = new PagedDataSource();
 
-                            pds1.AllowPaging = true;
+                                pds1.AllowPaging = true;
 
-                            pds1.PageSize = 5;
+                                pds1.PageSize = 5;
 
-                            pds1.DataSource = dt.DefaultView;
-                            int Count1 = pds1.PageCount;
-                            if (Count1 == 1)
-                            {
-                                currentPage = 1;
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = false;
+                                pds1.DataSource = dt.DefaultView;
+                                int Count1 = pds1.PageCount;
+                                if (Count1 == 1)
+                                {
+                                    currentPage = 1;
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = false;
+                                }
+                                else if (currentPage == Count)
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = false;
+
+                                }
+                                else if (currentPage == 1)
+                                {
+                                    btnBefore.Enabled = false;
+                                    btnNext.Enabled = true;
+
+                                }
+                                else
+                                {
+                                    btnBefore.Enabled = true;
+                                    btnNext.Enabled = true;
+                                }
+                                lblCurrentPage.Text = currentPage.ToString();
+                                labPage.Text = Count.ToString();
+                                pds.CurrentPageIndex = currentPage - 1;
+
+                                rptinsert.DataSource = pds;
+
+                                rptinsert.DataBind();
+                                Conn.Close(); //关闭数据库
                             }
-                            else if (currentPage == Count)
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = false;
-
-                            }
-                            else if (currentPage == 1)
-                            {
-                                btnBefore.Enabled = false;
-                                btnNext.Enabled = true;
-
-                            }
-                            else
-                            {
-                                btnBefore.Enabled = true;
-                                btnNext.Enabled = true;
-                            }
-                            lblCurrentPage.Text = currentPage.ToString();
-                            labPage.Text = Count.ToString();
-                            pds.CurrentPageIndex = currentPage - 1;
-
-                            rptinsert.DataSource = pds;
-
-                            rptinsert.DataBind();
-                            Conn.Close(); //关闭数据库
-                        }
                             else
                             {
                                 Response.Write("<script>alert('没有相关信息！');</script>");
@@ -2097,9 +2109,9 @@ public partial class Newfriend : System.Web.UI.Page
         }
     }
 
-  
 
-        
+
+
     protected void paperturn_Click(object sender, EventArgs e)
     {
         int num = 0;
@@ -2294,8 +2306,8 @@ public partial class Newfriend : System.Web.UI.Page
                                     page1.Visible = false;
                                     return;
                                 }
-                                }
-                            
+                            }
+
                         }
                         catch (Exception ex)
                         {
@@ -2398,7 +2410,7 @@ public partial class Newfriend : System.Web.UI.Page
 
                         }
 
-                    } 
+                    }
                 }
                 if (dropProv.SelectedValue == "出生日期")
                 {
@@ -2413,77 +2425,78 @@ public partial class Newfriend : System.Web.UI.Page
                                 Cmd.CommandText = "select * from tabUsers where year like @year ";
                                 Cmd.Parameters.Add(new SqlParameter("@year", "%" + massage + "%"));
                                 int count2 = Convert.ToInt32(Cmd.ExecuteScalar());
-                                if (count2 > 0) { 
+                                if (count2 > 0)
+                                {
 
-                                DataTable dt = new DataTable();
+                                    DataTable dt = new DataTable();
 
                                     dt = Class.Table("select*from tabUsers where year like '%" + massage + "%' and ID!='" + ID + "'");
 
                                     PagedDataSource pds = new PagedDataSource();
 
-                                pds.AllowPaging = true;
+                                    pds.AllowPaging = true;
 
-                                pds.PageSize = 5;
+                                    pds.PageSize = 5;
 
-                                pds.DataSource = dt.DefaultView;
-                                int Count = pds.PageCount;
-                                labPage.Text = Count.ToString();
-                                if (papercount == 0 || papercount > Count)
-                                {
-                                    Response.Write("<script>alert('操作无效')</script>");
-                                }
-                                else
-                                {
-                                    lblCurrentPage.Text = papercount.ToString();
-
-                                    DataTable dt1 = new DataTable();
-
-                                    dt1 = Class.Table(Cmd.CommandText);
-
-                                    PagedDataSource pds1 = new PagedDataSource();
-
-                                    pds1.AllowPaging = true;
-
-                                    pds1.PageSize = 5;
-
-                                    pds1.DataSource = dt.DefaultView;
-                                    int Count1 = pds1.PageCount;
-                                    int currentPage = Convert.ToInt32(lblCurrentPage.Text);
-                                    if (Count1 == 1)
+                                    pds.DataSource = dt.DefaultView;
+                                    int Count = pds.PageCount;
+                                    labPage.Text = Count.ToString();
+                                    if (papercount == 0 || papercount > Count)
                                     {
-                                        currentPage = 1;
-                                        btnBefore.Enabled = false;
-                                        btnNext.Enabled = false;
-                                    }
-                                    else if (currentPage == Count)
-                                    {
-                                        btnBefore.Enabled = true;
-                                        btnNext.Enabled = false;
-
-                                    }
-                                    else if (currentPage == 1)
-                                    {
-                                        btnBefore.Enabled = false;
-                                        btnNext.Enabled = true;
-
+                                        Response.Write("<script>alert('操作无效')</script>");
                                     }
                                     else
                                     {
-                                        btnBefore.Enabled = true;
-                                        btnNext.Enabled = true;
+                                        lblCurrentPage.Text = papercount.ToString();
+
+                                        DataTable dt1 = new DataTable();
+
+                                        dt1 = Class.Table(Cmd.CommandText);
+
+                                        PagedDataSource pds1 = new PagedDataSource();
+
+                                        pds1.AllowPaging = true;
+
+                                        pds1.PageSize = 5;
+
+                                        pds1.DataSource = dt.DefaultView;
+                                        int Count1 = pds1.PageCount;
+                                        int currentPage = Convert.ToInt32(lblCurrentPage.Text);
+                                        if (Count1 == 1)
+                                        {
+                                            currentPage = 1;
+                                            btnBefore.Enabled = false;
+                                            btnNext.Enabled = false;
+                                        }
+                                        else if (currentPage == Count)
+                                        {
+                                            btnBefore.Enabled = true;
+                                            btnNext.Enabled = false;
+
+                                        }
+                                        else if (currentPage == 1)
+                                        {
+                                            btnBefore.Enabled = false;
+                                            btnNext.Enabled = true;
+
+                                        }
+                                        else
+                                        {
+                                            btnBefore.Enabled = true;
+                                            btnNext.Enabled = true;
+                                        }
+                                        lblCurrentPage.Text = currentPage.ToString();
+                                        labPage.Text = Count.ToString();
+                                        pds.CurrentPageIndex = currentPage - 1;
+
+                                        rptinsert.DataSource = pds;
+
+                                        rptinsert.DataBind();
+
+                                        Conn.Close(); //关闭数据库
                                     }
-                                    lblCurrentPage.Text = currentPage.ToString();
-                                    labPage.Text = Count.ToString();
-                                    pds.CurrentPageIndex = currentPage - 1;
 
-                                    rptinsert.DataSource = pds;
-
-                                    rptinsert.DataBind();
-
-                                    Conn.Close(); //关闭数据库
                                 }
-
-                            }
                                 else
                                 {
                                     Response.Write("<script>alert('没有相关信息！');</script>");
@@ -2594,8 +2607,8 @@ public partial class Newfriend : System.Web.UI.Page
                                     return;
                                 }
 
-                                }
-                            } 
+                            }
+                        }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
@@ -2616,7 +2629,7 @@ public partial class Newfriend : System.Web.UI.Page
         string sql1 = "select *from tabUsers where ID='" + id + "'";
         string name = Class.Search(sql1);
         int ID = Convert.ToInt32(Session["ID1"].ToString());
-        string picture1= Class.Search6("select *from tabUsers where ID='" +ID+ "'");
+        string picture1 = Class.Search6("select *from tabUsers where ID='" + ID + "'");
         string massage1 = ask1.Text;
         string name1 = Session["name"].ToString();
         //int ID = Convert.ToInt32(Session["ID1"].ToString());
@@ -2625,19 +2638,29 @@ public partial class Newfriend : System.Web.UI.Page
         {
             Response.Write("<script>alert('好友不能是自己！');</script>");
             return;
-        }      
-        string sql2= "insert into ask(ID,name,friendID,friendname,picture,picture1,quanxian,massage) values('" + ID + "','"+name1 +"','" + id + "','" + name + "','" + picture1 + "','"+picture +"','" + 1 + "','"+massage1 +"')";      
-        int result1 = Class.Put(sql2);
-        if (result1==1)
-        {
-            Response.Write("<script>alert('发送请求成功！');</script>");
-            return;
         }
-        else
+        string sql3 = "select*from Friend where ID='" + ID + "'and friendID='" + id + "'";
+        int result2 = Class.exist(sql3);
+        if (result2 == 0)
         {
-            Response.Write("<script>alert('发送请求失败！');</script>");
-            return;
-        }
+            string sql2 = "insert into ask(ID,name,friendID,friendname,picture,picture1,quanxian,massage) values('" + ID + "','" + name1 + "','" + id + "','" + name + "','" + picture1 + "','" + picture + "','" + 1 + "','" + massage1 + "')";
+            int result1 = Class.Put(sql2);
+            if (result1 == 1)
+            {
+                Response.Write("<script>alert('发送请求成功！');</script>");
+                return;
+            }
+            else
+            {
+                Response.Write("<script>alert('发送请求失败！');</script>");
+                return;
+            }
 
+        }
+        if(result2 == 1)
+        {
+            Response.Write("<script>alert('该好友已经添加！');</script>");
+            return;
+        }
     }
 }

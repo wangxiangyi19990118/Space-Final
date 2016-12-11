@@ -16,7 +16,7 @@
     </div>
     <div>
     我的说说
-        <asp:Repeater id="repeaterdiary" runat ="server" OnItemDataBound="repeaterdiary_ItemDataBound">
+        <asp:Repeater id="repeaterdiary" runat ="server" OnItemDataBound="repeaterdiary_ItemDataBound" OnItemCommand="repeaterdiary_ItemCommand">
           <HeaderTemplate> 
                 <table>
                     <tr>
@@ -31,6 +31,7 @@
                    
                     <td> <FTB:FreeTextBox ID="FreeTextBox1" runat="server" Text =' <%# Eval("matter")%>' ReadOnly ="true" ></FTB:FreeTextBox></td>
                      <td><%# Eval("good")%>个赞</td>
+                     <td><asp:LinkButton ID="LinkButton3" runat="server" Text="赞" CommandName="yes" CommandArgument='<%#Eval("id") %>'></asp:LinkButton></td>
                       <td><asp:LinkButton ID="lbtEditor" runat="server" Text="修改" PostBackUrl='<%#"UpdateSays.aspx?id="+Eval("id") %>'></asp:LinkButton></td>
                     <td><asp:LinkButton ID="lbtDelete" runat="server" Text="删除"  CommandName="Delete"  CommandArgument='<%#Eval("id") %>' OnClick="lbtDelete_Click"></asp:LinkButton></td>
                      <asp:Repeater ID="friend2" runat="server" >
@@ -49,7 +50,7 @@
                     <td><asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#Eval("picture1")%>' Width="100" Height="80"  PostBackUrl='<%#"Visiter.aspx?id="+Eval("id") %>'/></td>
                     <td><%# Eval("rptmatter")%></td>       
                     <td><%# Eval("datetime")%></td>
-                    
+                     <td><asp:LinkButton ID="LinkButton2" runat="server" Text="回复" PostBackUrl='<%#"huifu.aspx?id="+Eval("id") %>'></asp:LinkButton></td>
                      <td><asp:LinkButton ID="lbtDelete" runat="server" Text="删除"  CommandName="Delete"  CommandArgument='<%#Eval("id") %>' OnClick="lbtDelete_Click"></asp:LinkButton></td>
                </tr>
                 </ItemTemplate>

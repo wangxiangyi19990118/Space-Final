@@ -57,7 +57,7 @@ public partial class Repete : System.Web.UI.Page
             string rpt = rpt1.Text;
             string sql2 = "select*from tabUsers where ID='" +ID + "'";
             string picture = Class.Search6(sql2);
-            string sql3 = "insert into inf (userID,title,tip,class,matter,name,id1,id2,id3,rptmatter,picture,id0,picture1,good) values('" + userID + "','" + title + "','" + tip + "','" + class1 + "','" + matter + "','" + name + "','"+id+"','"+0+"','"+id3+"','"+rpt+"','"+picture+"','"+ID+"','"+picture1+"','"+0+"')";
+            string sql3 = "insert into inf (userID,title,tip,class,matter,name,id1,id2,id3,rptmatter,picture,id0,picture1,good) values('" + userID + "','" + title + "','" + tip + "','" + class1 + "','" + matter + "','" + name + "','"+id+"','"+ id3 + "','"+1+"','"+rpt+"','"+picture+"','"+ID+"','"+picture1+"','"+0+"')";
            
             int result = Class.Put(sql3);
            

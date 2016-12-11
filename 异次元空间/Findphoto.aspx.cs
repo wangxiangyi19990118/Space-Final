@@ -232,7 +232,7 @@ public partial class Findphoto : System.Web.UI.Page
                 int result2 = Class.Put(sql);
                 if (result2 == 1)
                 {
-                    Response.Write("<script>alert('添加成功！')；</script>");
+                    Response.Write("<script>alert('添加成功！');</script>");
                     return;
                 }
                 else if (result2 != 1)

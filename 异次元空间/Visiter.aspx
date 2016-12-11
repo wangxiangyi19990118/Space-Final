@@ -54,7 +54,7 @@
             <ItemTemplate>
                 <tr> 
                     <td><%# Eval("name")%></td>
-                     
+                     <td><asp:Image ID="Image2" runat="server" ImageUrl='<%#Eval("picture1")%>' Width="100" Height="80" /></td>
                     <td><%# Eval("rptmatter")%></td>
                     <td><%# Eval("datetime")%></td>
                </tr>
