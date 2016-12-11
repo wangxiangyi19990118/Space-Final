@@ -8,7 +8,7 @@ using System.Data;
 
 public partial class Visiter : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)//分为从好友列表里访问还是从动态中访问是有两个不同的页面，同Visiter
     {
         if (Session["name"] != null)
         {

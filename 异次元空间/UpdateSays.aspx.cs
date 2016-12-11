@@ -53,9 +53,7 @@ public partial class UpdateSays : System.Web.UI.Page
         else
         {
             string sql = "update inf set matter='" + matter + "' where id='" + id + "'";
-            //string sql1 = "update inf1 set matter='" + matter + "' where id='" + id + "'";
             int result1 = Class.Put(sql);
-            //int result2 = Class.Put(sql1);
             if (result1 == 1)
                 Response.Write("<script>alert('修改成功！');location='Says.aspx'</script>");
             else

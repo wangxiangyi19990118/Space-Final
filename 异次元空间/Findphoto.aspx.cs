@@ -43,18 +43,6 @@ public partial class Findphoto : System.Web.UI.Page
         }
 
     }
-
-    protected void newalbum3_Click(object sender, EventArgs e)
-    {
-        repeaterdiary.Visible = true;
-        page1.Visible = true;
-        string ID = Session["ID1"].ToString();
-        int id = Convert.ToInt32(Request.QueryString["id1"]);
-        string sql1 = "select * from Photo where id1='" + id + "'";
-        string album = Class.Search(sql1);
-        string sql = "select * from Photo1 where ID='" + ID + "'and album='" + album + "'order by datetime desc";
-        DataBindToRepeater(1, sql);
-    }
     protected void btnBefore_Click(object sender, EventArgs e)//上一页
     {
         string ID = Session["ID1"].ToString();

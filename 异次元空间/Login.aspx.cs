@@ -17,13 +17,12 @@ public partial class Login : System.Web.UI.Page
     {
         ImageButton1.ImageUrl = "verification.aspx";
     }
-    protected void btnRegester_Click(object sender, EventArgs e)
+    protected void btnRegester_Click(object sender, EventArgs e)//登录，进行参数化查询
     {
         string ID = txtID.Text.Trim ();
         string pwd = txtpwd.Text;
         string hspwd1 = Class.HashEncode.HashEncoding(pwd);
         string vcode = Vcode.Text;
-        //string sql = "select * from tabUsers where ID=@ID and hspwd=@hspwd";
         if (ID.Length == 0 || pwd.Length == 0)
         {
             Response.Write("<script>alert('登录失败，账号、密码不为空！')</script>");
@@ -50,7 +49,7 @@ public partial class Login : System.Web.UI.Page
                         int count = Convert.ToInt32(Cmd.ExecuteScalar());
 
                         if (count > 0)
-                        { 
+                        {
                             Session["ID1"] = ID;
                             string sql = "select*from tabUsers where id='" + ID + "'";
                             string name = Class.Search(sql);
@@ -67,33 +66,6 @@ public partial class Login : System.Web.UI.Page
 
                 }
             }
-            /*else
-                    {
-                        int result = Class.exist(sql);
-                        if (result != 1)
-                        {
-                            Response.Write("<script>alert('登录失败，请正确填写账号、密码！')</script>");
-                            return;
-
-                        }
-                        else
-                        {  
-                            string name = Class.Search(sql);
-                            string ID1 = txtID.Text;
-                            /*HttpCookie myCookie = new HttpCookie("someCookie");
-                            HttpCookie getCookie = Request.Cookies["someCookie"];
-                            myCookie.Values.Add("auth", "admin");
-                            Response.Cookies.Add(myCookie);
-                            myCookie.Expires = DateTime.Now.AddDays(3);
-                            myCookie.Values["auth"];
-                            Session["name"] = name;
-                            Session["ID1"] = ID;
-                            Response.Write("<script>alert('登录成功！');location='Space.aspx'</script>");
-
-                        }
-                    }
-                }*/
-
         }
     }
 }

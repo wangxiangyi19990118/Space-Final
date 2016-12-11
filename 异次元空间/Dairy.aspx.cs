@@ -78,7 +78,7 @@ public partial class Dairy : System.Web.UI.Page
         lblCurrentPage.Text = Count.ToString();
         DataBindToRepeater(Count, sql);
     }
-    protected void paperturn_Click(object sender, EventArgs e)
+    protected void paperturn_Click(object sender, EventArgs e)//跳页
     {
         int num = 0;
 
@@ -119,7 +119,7 @@ public partial class Dairy : System.Web.UI.Page
             DataBindToRepeater(1, sql);
         }
     }
-    void DataBindToRepeater(int currentPage, string sql)
+    void DataBindToRepeater(int currentPage, string sql)//执行绑定
     {
 
         DataTable dt = new DataTable();
@@ -181,16 +181,6 @@ public partial class Dairy : System.Web.UI.Page
                 Response.Write("<script>alert('删除失败！');location='Dairy.aspx'</script>");
 
         }
-
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        repeaterdiary.Visible = true;
-        page1.Visible = true;
-        string ID = Session["ID1"].ToString();
-
-        string sql = "select * from inf where userID='" + ID + "'and id2='" + 0 + "'and id3='" + 0 + "' order by datetime desc";
-        DataBindToRepeater(1, sql);
-    }
 
     protected void repeaterdiary_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {

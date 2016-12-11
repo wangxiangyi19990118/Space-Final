@@ -22,7 +22,7 @@ public partial class Newfriend : System.Web.UI.Page
         }
         else Response.Write("<script>alert('请先登录！'),location='Login.aspx'</script>");
     }
-    protected void insert(object sender, EventArgs e)
+    protected void insert(object sender, EventArgs e)//按照条件查找好友，相似代码很多
     {
         friend1.Visible = true;
         page1.Visible = true;
@@ -2623,7 +2623,7 @@ public partial class Newfriend : System.Web.UI.Page
     }
 
 
-    protected void insert_Click(object sender, EventArgs e)
+    protected void insert_Click(object sender, EventArgs e)//判断请求是否合法并发送好友请求
     {
         int id = Convert.ToInt32((sender as LinkButton).CommandArgument);
         string sql1 = "select *from tabUsers where ID='" + id + "'";
@@ -2632,7 +2632,6 @@ public partial class Newfriend : System.Web.UI.Page
         string picture1 = Class.Search6("select *from tabUsers where ID='" + ID + "'");
         string massage1 = ask1.Text;
         string name1 = Session["name"].ToString();
-        //int ID = Convert.ToInt32(Session["ID1"].ToString());
         string picture = Class.Search6(sql1);
         if (id == ID)
         {

@@ -8,7 +8,7 @@ using System.Data;
 
 public partial class Visiter : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)//这里将好友的各种信息放入到一个页面里
     {
         if (Session["name"] != null)
         {
@@ -21,7 +21,7 @@ public partial class Visiter : System.Web.UI.Page
             string visiterid = Session["ID1"].ToString();
             string sql1 = "select* from friend where ID = '" + visiterid + "'and friendID='" + ID + "'";
             string quanxian = Class.Search7(sql1);
-            if (quanxian == "0")
+            if (quanxian == "0")//判断是否有权限访问
             {
                 Response.Write("<script>alert('您没有访问权限！'),location='Space.aspx'</script>");
 

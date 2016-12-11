@@ -20,7 +20,7 @@ public partial class Firend : System.Web.UI.Page
             Div1.Visible = true;
             repeater1.Visible = true;
            
-            string sql = "select * from Friend where ID='" + ID + "' and special='" + 1 + "'order by friendID desc";
+            string sql = "select * from Friend where ID='" + ID + "' and special='" + 1 + "'order by friendID desc";//优先显示特别关心
             DataBindToRepeater1(1, sql);
             string sql1 = "select * from Friend where ID='" + ID + "' and special='" + 0 + "'order by friendID desc";
             DataBindToRepeater(1, sql1);
@@ -28,7 +28,7 @@ public partial class Firend : System.Web.UI.Page
         else Response.Write("<script>alert('请先登录！'),location='Login.aspx'</script>");
     }
 
-    protected void repeaterdiary_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void repeaterdiary_ItemCommand(object source, RepeaterCommandEventArgs e)//删除好友和对好友进行权限管理
     {
         if (e.CommandName == "Delete")
         {
@@ -118,19 +118,6 @@ public partial class Firend : System.Web.UI.Page
         }
     }
     
-
-    protected void newalbum3_Click(object sender, EventArgs e)
-    {
-        repeaterdiary.Visible = true;
-        page1.Visible = true;
-        Div1.Visible = true;
-        repeater1.Visible = true;
-        string ID = Session["ID1"].ToString();
-        string sql = "select * from Friend where ID='" + ID + "' and special='"+1+"'order by friendID desc";
-        DataBindToRepeater1(1, sql);
-        string sql1= "select * from Friend where ID='" + ID + "' and special='" + 0 + "'order by friendID desc";
-        DataBindToRepeater(1, sql1);
-    }
     protected void btnBefore_Click(object sender, EventArgs e)//上一页
     {
         string ID = Session["ID1"].ToString();
@@ -504,4 +491,4 @@ public partial class Firend : System.Web.UI.Page
         lblCurrentPage.Text = Count.ToString();
         DataBindToRepeater(Count, sql);
     }
-}
+}//分别是管理特别关心好友和普通好友

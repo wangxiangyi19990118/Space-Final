@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class massage : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)//查看留言
     {
         if (Session["name"] != null)
         {

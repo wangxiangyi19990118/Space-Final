@@ -37,9 +37,8 @@ public partial class WriteDiary : System.Web.UI.Page
         string sql1 = "select*from tabUsers where ID='" + userID + "'";
         string picture = Class.Search6(sql1);
         string sql= "insert into inf (userID,title,tip,class,matter,name,id2,id3,picture,id0,picture1,good) values('" + userID + "','" +title + "','" + tip + "','" +class2 + "','" + matter + "','"+name+"','"+0+"','"+0+"','"+picture+"','"+userID+"','"+picture+"','"+0+"')";
-        //string sql3 = "insert into inf1 (picture1) values('" + picture + "')";
        
-        if (title.Length == 0 || class2.Length == 0 || matter.Length == 0 )//判断输入都不为空
+        if (title.Length == 0 || class2.Length == 0 || matter.Length == 0 )//判断输入不为空
         {
             Response.Write("<script>alert('输入不为空！')</script>");
             return;

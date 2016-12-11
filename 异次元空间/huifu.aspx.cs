@@ -8,7 +8,7 @@ using System.Data;
 
 public partial class huifu : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)//用于自己回复自己的动态，防止传值混乱
     {
         if (Session["name"] != null)
         {
@@ -19,7 +19,7 @@ public partial class huifu : System.Web.UI.Page
         else
         {
             Response.Write("<script>alert('请先登录！'),location='Login.aspx'</script>");
-            //Response.Redirect("Login.aspx");
+          
         }
     }
 

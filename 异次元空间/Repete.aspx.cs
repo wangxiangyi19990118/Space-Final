@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class Repete : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)//评论动态
     {
         if (Session["name"] != null)
         {
@@ -19,7 +19,6 @@ public partial class Repete : System.Web.UI.Page
         else
         {
             Response.Write("<script>alert('请先登录！'),location='Login.aspx'</script>");
-            //Response.Redirect("Login.aspx");
         }
     }
 

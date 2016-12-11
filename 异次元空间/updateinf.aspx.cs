@@ -43,7 +43,7 @@ public partial class updateinf : System.Web.UI.Page
         else Response.Write("<script>alert('请先登录！'),location=='Login.aspx'</script>");
     }
 
-    protected void update1_Click(object sender, EventArgs e)
+    protected void update1_Click(object sender, EventArgs e)//分为是否修改头像和密保两种大类
     {
         string ID = Session["ID1"].ToString();
         lbname.Text = ID;

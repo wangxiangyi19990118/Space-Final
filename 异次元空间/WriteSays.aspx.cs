@@ -31,7 +31,7 @@ public partial class WriteSays : System.Web.UI.Page
         string sql1 = "select*from tabUsers where ID='" + userID + "'";
         string picture = Class.Search6(sql1);
         string sql = "insert into inf (userID,matter,name,id2,id3,picture,id0,picture1,good) values('" + userID + "','" + matter + "','"+name+"','"+1+"','"+0+"','"+picture+"','"+userID+"','"+picture+"','"+0+"')";
-        //string sql2 = "insert into inf1 (picture1) values('" + picture + "')";
+       
         if ( matter.Length == 0)//判断输入都不为空
         {
             Response.Write("<script>alert('输入不为空！')</script>");
@@ -40,7 +40,7 @@ public partial class WriteSays : System.Web.UI.Page
         else
         {
             int result2 = Class.Put(sql);
-           // int result3 = Class.Put(sql2);
+
             if (result2 == 1)
                 Response.Write("<script>alert('发表成功！');location='Says.aspx'</script>");
             else

@@ -16,7 +16,7 @@ public partial class Says : System.Web.UI.Page
             page1.Visible = true;
             string ID = Session["ID1"].ToString();
 
-            string sql = "select * from inf where userID='" + ID + "'and id2='" + 1 + "'and id3='"+0+"' order by datetime desc";
+            string sql = "select * from inf where userID='" + ID + "'and id2='" + 1 + "'and id3='"+0+"' order by datetime desc";//按照时间排序
             DataBindToRepeater(1, sql);
         }
         else Response.Write("<script>alert('请先登录！'),location='Login.aspx'</script>");

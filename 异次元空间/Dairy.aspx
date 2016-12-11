@@ -40,10 +40,15 @@
                 <table>
                     <tr>
                         <th>评论</th>
+                        <th>头像</th>
+                        <th>昵称</th>
+                        <th>内容</th>
+                        <th>时间</th>
                     </tr>
             </HeaderTemplate>
             <ItemTemplate>
-                <tr>  <td><asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#Eval("picture1")%>' Width="100" Height="80"  PostBackUrl='<%#"Visiter.aspx?id="+Eval("id") %>'/></td>
+                <tr>  <td></td>
+                    <td><asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#Eval("picture1")%>' Width="100" Height="80"  PostBackUrl='<%#"Visiter.aspx?id="+Eval("id") %>'/></td>
                     <td><%# Eval("name")%></td>
                     <td><%# Eval("rptmatter")%></td>       
                     <td><%# Eval("datetime")%></td>

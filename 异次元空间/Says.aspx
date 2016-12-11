@@ -39,9 +39,10 @@
                 <table>
                     <tr>
                         <th>评论</th>
-                         <th>头像</th>
-                        <th>账号</th>
                         <th>昵称</th>
+                         <th>头像</th>
+                        <th>内容</th>
+                        <th>时间</th>
                     </tr>
             </HeaderTemplate>
             <ItemTemplate>

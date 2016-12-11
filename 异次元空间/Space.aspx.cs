@@ -18,7 +18,7 @@ public partial class Space : System.Web.UI.Page
             string ID = Session["ID1"].ToString();
             lbname.Text = name;
             string sql = "select*from inf where userID in( select ID from tabUsers where ID in(select friendID from Friend where ID='" + ID + "'and quanxian='"+1+ "'and special='" + 0 + "'))and id3='" + 0+"' order by datetime DESC";
-            DataTable dt = new DataTable();
+            DataTable dt = new DataTable();//就是根据用户ID查找好友以及好友的动态，两个IN
             dt = Class.Table(sql);
             friend1.DataSource = dt;
             friend1.DataBind();
